@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnAdd;
     EditText etItem;
     RecyclerView rvItems;
+    ItemsAdapter itemsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +36,19 @@ public class MainActivity extends AppCompatActivity {
         items.add("Go to the gym");
         items.add("Have fun!");
 
+        ItemsAdapter.OnLongClickListener onLongClickListener = new ItemsAdapter.OnLongClickListener(){
+            @Override
+            public void onItemLongClicked(int position) {
+                //Delete the item from the model
+                items.remove(position);
+                //Notify the adapter
+                itemsAdapter.notifyItemRemoved(position);
+                Toast.makeText(getApplicationContext(),"Item was removed",Toast.LENGTH_SHORT).show();
 
-        final ItemsAdapter itemsAdapter = new ItemsAdapter(items);
+            }
+        };
+
+        itemsAdapter = new ItemsAdapter(items, onLongClickListener);
         rvItems.setAdapter(itemsAdapter);
         rvItems.setLayoutManager(new LinearLayoutManager(this));
 
