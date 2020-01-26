@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
                 itemsAdapter.notifyItemInserted(items.size() - 1);
                 etItem.setText("");
+                Toast.makeText(getApplicationContext(),"Item was added",Toast.LENGTH_SHORT).show();
             }
         });
     }
